@@ -1,3 +1,13 @@
+/*
+$breakpoint choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em=16px
+We use em because media queries are not affected by rem that we define. Media query use the font size define by thw browser, which can be 16px by default or any values defined by the user say 20px
+*/
 @keyframes moveInLeft {
   0% {
     opacity: 0;
@@ -125,6 +135,26 @@ body {
 
 html {
   font-size: 62.5%;
+}
+@media (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media (max-width: 37.5em) {
+  html {
+    font-size: 30%;
+  }
+}
+@media (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
 }
 
 body {

@@ -13,3 +13,46 @@
     transform: translate(-50%,-50%);
 }
 
+// MEDIA QUERY MANAGER
+// 0 - 600px PHONE
+// 900 - 1200px Tablet LandScape
+// 600 - 900px Tablet Portrait
+// [1200 - 1800] is where our normal styles apply
+// 1800+px Big Desktop
+
+/*
+$breakpoint choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em=16px
+We use em because media queries are not affected by rem that we define. Media query use the font size define by thw browser, which can be 16px by default or any values defined by the user say 20px
+*/ 
+@mixin respond($breakpoint){
+    @if $breakpoint == phone {
+        // 600px
+        @media (max-width: 37.5em){
+            @content
+        };
+    }
+    @if $breakpoint == tab-port {
+        // 900px
+        @media (max-width: 56.25em){
+            @content
+        };
+    }
+    @if $breakpoint == tab-land {
+        // 1200px
+        @media (max-width: 75em){
+            @content
+        };
+    }
+    @if $breakpoint == big-desktop {
+        // 1800px
+        @media (min-width: 112.5em){
+            @content
+        };
+    }
+}

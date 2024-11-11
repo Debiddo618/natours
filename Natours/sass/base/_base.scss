@@ -5,7 +5,32 @@
 }
 
 html{
+    // this defines what 1rem is: 10/16px = .625, since we want 1rem = 10px
     font-size: 62.5%;
+
+    // order does matter since last one gets applied if screen is 500px
+    @include respond(tab-land){
+        // width < 1200px
+        // we want 1rem = 9px -> 9/16px = .5625
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port){
+        // width < 900px
+        // we want 1rem = 8px -> 8/16px = .5
+        font-size: 50%;
+    }
+    @include respond(phone){
+        // width < 600px
+        // we want 1rem = 4.8px -> 44.8/16px = .3
+        font-size: 30%;
+    }
+
+    @include respond(big-desktop){
+        // width > 1800px
+        // we want 1rem = 12px -> 12/16px = .75
+        font-size: 75%;
+    }
 }
 
 body {
