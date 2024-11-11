@@ -5,6 +5,8 @@ $breakpoint choices:
 - tab-land
 - big-desktop
 
+ORDER: Base + Typography > general layout + grid > page layout > components
+
 1em=16px
 We use em because media queries are not affected by rem that we define. Media query use the font size define by thw browser, which can be 16px by default or any values defined by the user say 20px
 */
@@ -50,7 +52,6 @@ body {
   /* font-size: 16px; */
   line-height: 1.7;
   color: #777;
-  padding: 3rem;
 }
 
 .heading-primary {
@@ -66,12 +67,23 @@ body {
   letter-spacing: 3.5rem;
   animation: moveInLeft 1s ease-out;
 }
+@media (max-width: 37.5em) {
+  .heading-primary--main {
+    letter-spacing: 1rem;
+    font-size: 5rem;
+  }
+}
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1.75rem;
   animation: moveInRight 1s ease-out;
+}
+@media (max-width: 37.5em) {
+  .heading-primary--sub {
+    letter-spacing: 0.5rem;
+  }
 }
 
 .heading-secondary {
@@ -84,6 +96,16 @@ body {
   color: transparent;
   letter-spacing: 2px;
   transition: all 0.2s;
+}
+@media (max-width: 56.25em) {
+  .heading-secondary {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 37.5em) {
+  .heading-secondary {
+    font-size: 2.5rem;
+  }
 }
 .heading-secondary:hover {
   transform: skewY(2deg) skewX(15deg) scale(1.1);
@@ -110,9 +132,19 @@ body {
 .u-margin-bottom-big {
   margin-bottom: 8rem !important;
 }
+@media (max-width: 56.25em) {
+  .u-margin-bottom-big {
+    margin-bottom: 5rem !important;
+  }
+}
 
 .u-margin-bottom-medium {
   margin-bottom: 4rem !important;
+}
+@media (max-width: 56.25em) {
+  .u-margin-bottom-medium {
+    margin-bottom: 3rem !important;
+  }
 }
 
 .u-margin-bottom-small {
@@ -146,11 +178,6 @@ html {
     font-size: 50%;
   }
 }
-@media (max-width: 37.5em) {
-  html {
-    font-size: 30%;
-  }
-}
 @media (min-width: 112.5em) {
   html {
     font-size: 75%;
@@ -159,6 +186,12 @@ html {
 
 body {
   box-sizing: border-box;
+  padding: 3em;
+}
+@media (max-width: 56.25em) {
+  body {
+    padding: 0;
+  }
 }
 
 .btn, .btn:link, .btn:visited {
@@ -246,17 +279,45 @@ body {
   transition: all 0.2s;
   outline-offset: 2rem;
 }
+@media (max-width: 56.25em) {
+  .composition__photo {
+    float: left;
+    position: relative;
+    width: 33.3333%;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+  }
+}
 .composition__photo--p1 {
   left: 0;
   top: -2rem;
+}
+@media (max-width: 56.25em) {
+  .composition__photo--p1 {
+    top: 0;
+    transform: scale(1.2);
+  }
 }
 .composition__photo--p2 {
   right: 0;
   top: 2rem;
 }
+@media (max-width: 56.25em) {
+  .composition__photo--p2 {
+    top: -1rem;
+    transform: scale(1.3);
+    z-index: 100;
+  }
+}
 .composition__photo--p3 {
   left: 20%;
   top: 10rem;
+}
+@media (max-width: 56.25em) {
+  .composition__photo--p3 {
+    top: 1rem;
+    left: 0;
+    transform: scale(1.1);
+  }
 }
 .composition__photo:hover {
   transform: scale(1.05) translateY(-0.5rem);
@@ -277,10 +338,20 @@ body {
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   transition: all 0.3s;
 }
+@media (max-width: 56.25em) {
+  .feature-box {
+    padding: 2rem;
+  }
+}
 .feature-box__icon {
   font-size: 6rem;
   margin-bottom: 0.5rem;
   color: #55c57a;
+}
+@media (max-width: 56.25em) {
+  .feature-box__icon {
+    margin-bottom: 0;
+  }
 }
 .feature-box:hover {
   transform: translateY(-1.5rem) scale(1.1);
@@ -293,24 +364,22 @@ body {
   height: 52rem;
 }
 .card__side {
-  background-color: orangered;
   height: 52rem;
-  transition: all 0.5s ease;
+  transition: all 0.8s ease;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   backface-visibility: hidden;
   border-radius: 3px;
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
 }
 .card__side--front {
   background-color: #fff;
 }
 .card__side--back {
-  background-color: green;
-  transform: rotateY(-180deg);
+  transform: rotateY(180deg);
 }
 .card__side--back-1 {
   background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
@@ -322,17 +391,19 @@ body {
   background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
 }
 .card:hover .card__side--front {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
 }
 .card:hover .card__side--back {
-  transform: rotateY(0deg);
+  transform: rotateY(0);
 }
 .card__picture {
   background-size: cover;
   height: 23rem;
   background-blend-mode: screen;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-          clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 .card__picture--1 {
   background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../img/nat-5.jpg);
@@ -347,17 +418,17 @@ body {
   font-size: 2.8rem;
   font-weight: 300;
   text-transform: uppercase;
+  text-align: right;
   color: #fff;
   position: absolute;
   top: 12rem;
   right: 2rem;
-  text-align: right;
   width: 75%;
 }
 .card__heading-span {
   padding: 1rem 1.5rem;
   -webkit-box-decoration-break: clone;
-          box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 .card__heading-span--1 {
   background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85));
@@ -380,7 +451,6 @@ body {
   text-align: center;
   font-size: 1.5rem;
   padding: 1rem;
-  text-transform: uppercase;
 }
 .card__details ul li:not(:last-child) {
   border-bottom: 1px solid #eee;
@@ -395,8 +465,8 @@ body {
 }
 .card__price-box {
   text-align: center;
-  margin-bottom: 8rem;
   color: #fff;
+  margin-bottom: 8rem;
 }
 .card__price-only {
   font-size: 1.4rem;
@@ -405,6 +475,44 @@ body {
 .card__price-value {
   font-size: 6rem;
   font-weight: 100;
+}
+@media only screen and (max-width: 56.25em), only screen and (hover: none) {
+  .card {
+    height: auto;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  }
+  .card__side {
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+  .card__side--back {
+    transform: rotateY(0);
+    -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+  }
+  .card:hover .card__side--front {
+    transform: rotateY(0);
+  }
+  .card__details {
+    padding: 1rem 3rem;
+  }
+  .card__cta {
+    position: relative;
+    top: 0%;
+    left: 0;
+    transform: translate(0);
+    width: 100%;
+    padding: 7rem 4rem 4rem 4rem;
+  }
+  .card__price-box {
+    margin-bottom: 3rem;
+  }
+  .card__price-value {
+    font-size: 4rem;
+  }
 }
 
 .story {
@@ -418,6 +526,18 @@ body {
   font-size: 1.6rem;
   transform: skewX(-12deg);
 }
+@media (max-width: 56.25em) {
+  .story {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+}
+@media (max-width: 37.5em) {
+  .story {
+    transform: skewX(0deg);
+  }
+}
 .story__shape {
   width: 15rem;
   height: 15rem;
@@ -428,6 +548,11 @@ body {
   transform: translateX(-3rem) skewX(12deg);
   position: relative;
 }
+@media (max-width: 37.5em) {
+  .story__shape {
+    transform: translateX(-3rem) skewX(0deg);
+  }
+}
 .story__image {
   height: 100%;
   transform: translateX(-4rem) scale(1.4);
@@ -435,6 +560,11 @@ body {
 }
 .story__text {
   transform: skewX(12deg);
+}
+@media (max-width: 37.5em) {
+  .story__text {
+    transform: skewX(0deg);
+  }
 }
 .story__caption {
   position: absolute;
@@ -489,6 +619,11 @@ body {
   color: inherit;
   transition: all 0.5s;
 }
+@media (max-width: 56.25em) {
+  .form__input {
+    width: 100%;
+  }
+}
 .form__input:focus {
   outline: none;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
@@ -521,6 +656,12 @@ body {
 .form__radio-group {
   width: 49%;
   display: inline-block;
+}
+@media (max-width: 56.25em) {
+  .form__radio-group {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 }
 .form__radio-label {
   font-size: 1.6rem;
@@ -644,6 +785,12 @@ body {
           clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
 }
+@media (max-width: 37.5em) {
+  .header {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+}
 .header__logo-box {
   position: absolute;
   top: 4rem;
@@ -664,8 +811,19 @@ body {
   max-width: 114rem;
   margin: 0 auto;
 }
+@media (max-width: 56.25em) {
+  .row {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+}
 .row:not(:last-child) {
   margin-bottom: 8rem;
+}
+@media (max-width: 56.25em) {
+  .row:not(:last-child) {
+    margin-bottom: 6rem;
+  }
 }
 .row::after {
   content: "";
@@ -677,6 +835,17 @@ body {
 }
 .row [class^=col-]:not(:last-child) {
   margin-right: 6rem;
+}
+@media (max-width: 56.25em) {
+  .row [class^=col-]:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 6rem;
+  }
+}
+@media (max-width: 56.25em) {
+  .row [class^=col-] {
+    width: 100% !important;
+  }
 }
 .row .col-1-of-2 {
   width: calc((100% - 6rem) / 2);
@@ -703,9 +872,19 @@ body {
   font-size: 1.4rem;
   color: #f7f7f7;
 }
+@media (max-width: 56.25em) {
+  .footer {
+    padding: 8rem 0;
+  }
+}
 .footer__logo-box {
   text-align: center;
   margin-bottom: 8rem;
+}
+@media (max-width: 56.25em) {
+  .footer__logo-box {
+    margin-bottom: 6rem;
+  }
 }
 .footer__logo {
   width: 15rem;
@@ -715,6 +894,12 @@ body {
   border-top: 1px solid #777;
   padding-top: 2rem;
   display: inline-block;
+}
+@media (max-width: 56.25em) {
+  .footer__navigation {
+    width: 100%;
+    text-align: center;
+  }
 }
 .footer__list {
   list-style: none;
@@ -743,6 +928,12 @@ body {
   padding-top: 2rem;
   display: inline-block;
 }
+@media (max-width: 56.25em) {
+  .footer__copyright {
+    width: 100%;
+    float: none;
+  }
+}
 
 .navigation__checkbox {
   display: none;
@@ -760,6 +951,18 @@ body {
   text-align: center;
   cursor: pointer;
 }
+@media (max-width: 56.25em) {
+  .navigation__button {
+    top: 4rem;
+    right: 4rem;
+  }
+}
+@media (max-width: 37.5em) {
+  .navigation__button {
+    top: 3.5rem;
+    right: 3.5rem;
+  }
+}
 .navigation__background {
   height: 6rem;
   width: 6rem;
@@ -770,6 +973,18 @@ body {
   background-image: radial-gradient(#7ed56f, #28b485);
   z-index: 1000;
   transition: transform 0.8s;
+}
+@media (max-width: 56.25em) {
+  .navigation__background {
+    top: 4.5rem;
+    right: 4.5rem;
+  }
+}
+@media (max-width: 37.5em) {
+  .navigation__background {
+    top: 4rem;
+    right: 4rem;
+  }
 }
 .navigation__nav {
   height: 100vh;
@@ -866,6 +1081,11 @@ body {
   padding: 25rem 0;
   margin-top: -20vh;
 }
+@media (max-width: 56.25em) {
+  .section-about {
+    padding: 20rem 0;
+  }
+}
 
 .section-features {
   padding: 20rem 0;
@@ -877,16 +1097,31 @@ body {
 .section-features > * {
   transform: skewY(7deg);
 }
+@media (max-width: 56.25em) {
+  .section-features {
+    padding: 10rem 0;
+  }
+}
 
 .section-tours {
   background-color: #f7f7f7;
   padding: 25rem 0 15rem 0;
   margin-top: -10rem;
 }
+@media (max-width: 56.25em) {
+  .section-tours {
+    padding: 20rem 0 10rem 0;
+  }
+}
 
 .section-stories {
   position: relative;
-  padding: 15rem;
+  padding: 15rem 0;
+}
+@media (max-width: 56.25em) {
+  .section-stories {
+    padding: 20rem 0 10rem 0;
+  }
 }
 
 .section-book {
@@ -897,11 +1132,32 @@ body {
 .book {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/nat-10.jpg);
   background-size: cover;
-  height: 50rem;
   border-radius: 3px;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 75em) {
+  .book {
+    background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 65%, transparent 65%), url(../img/nat-10.jpg);
+    background-size: cover;
+  }
+}
+@media (max-width: 56.25em) {
+  .book {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../img/nat-10.jpg);
+    background-size: cover;
+  }
 }
 .book__form {
   width: 50%;
   padding: 6rem;
+}
+@media (max-width: 75em) {
+  .book__form {
+    width: 65%;
+  }
+}
+@media (max-width: 56.25em) {
+  .book__form {
+    width: 100%;
+  }
 }/*# sourceMappingURL=main.css.map */
